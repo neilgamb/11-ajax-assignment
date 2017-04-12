@@ -1,41 +1,54 @@
+let score = 0;
+
 function makeQuestion(question) {
     let parent = document.querySelector('main');
 
     let element = document.createElement('h1');
-    element.classList.add('questions');
 
     // category in <p>
-    let category = document.createElement('p');
-    category.textContent = question.category;
+    let category = document.createElement('h2');
+    category.textContent = ' " '+question.category+' " ';
 
     // value in an <p>
-    let value = document.createElement('p');
-    value.textContent = question.value;
+    let value = document.createElement('h3');
+    value.textContent = "for "+question.value;
 
     // question in an <p>
     let q = document.createElement('p');
-    q.textContent = question.quest;
+    q.textContent = question.quest+":";
+
+    // retrieve answer but DONT append
+    let answer = document.createElement('p');
+    answer.textContent = question.answer;
+    console.log(answer);
 
     // input in <input field>
     let input = document.createElement("INPUT");
     input.setAttribute("type", "text");
 
+    let scoreboard = document.createElement('p');
+    scoreboard.textContent = "SCORE: "+score;
+
     // submitButton in <button>
-    let answer = document.createElement('button');
-    answer.textContent = 'submit';
-    answer.addEventListener('click', function () {
+    let submission = document.createElement('button');
+    submission.textContent = 'submit';
+    submission.addEventListener('click', function () {
+        if(document.querySelector('input').value === question.answer){
+            score = score + question.value;
+        }
         parent.removeChild(element);
-        //let userAnswer = document.getElementById('input').value;
+        console.log(score);
         getQuestion();
     });
 
     parent.appendChild(element);
-
     element.appendChild(category);
     element.appendChild(value);
     element.appendChild(q);
     element.appendChild(input);
-    element.appendChild(answer);
+    element.appendChild(submission);
+    element.appendChild(scoreboard);
+
 
 }
 
@@ -56,6 +69,7 @@ function getQuestion(){
              category: response[0].category.title,
              value: response[0].value,
              quest: response[0].question,
+             answer: response[0].answer,
          }
          console.log(question);
 
