@@ -2,6 +2,7 @@ let score = 0;
 
 function makeQuestion(question) {
     let parent = document.querySelector('main');
+    let parent2 = document.querySelector('footer');
 
     let element = document.createElement('h1');
 
@@ -19,7 +20,7 @@ function makeQuestion(question) {
 
     // retrieve answer but DONT append
     let answer = document.createElement('p');
-    answer.textContent = question.answer;
+    answer.textContent = "Answer: "+question.answer;
     console.log(answer);
 
     // input in <input field>
@@ -42,6 +43,7 @@ function makeQuestion(question) {
     });
 
     parent.appendChild(element);
+    parent2.appendChild(answer);
     element.appendChild(category);
     element.appendChild(value);
     element.appendChild(q);
