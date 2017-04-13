@@ -38,6 +38,7 @@ function makeQuestion(question) {
             score = score + question.value;
         }
         parent.removeChild(element);
+        parent2.removeChild(answer);
         console.log(score);
         getQuestion();
     });
